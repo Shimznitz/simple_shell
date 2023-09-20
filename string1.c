@@ -1,87 +1,75 @@
 #include "shell.h"
 
 /**
- * _strcpy - These copies a string
- * @dest: A destination
- * @src: A source
+ * _strlen - Returns the length of a string
+ * @b: String
  *
- * Return: The pointer to destination
+ * Return: The integer length of string
  */
-char *_strcpy(char *dest, char *src)
+int _strlen(char *b)
 {
 	int i = 0;
 
-	if (dest == src || src == 0)
-		return (dest);
-	while (src[i])
-	{
-		dest[i] = src[i];
+	if (!b)
+		return (0);
+
+	while (*b++)
 		i++;
-	}
-	dest[i] = 0;
-	return (dest);
+	return (i);
 }
 
 /**
- * _strdup - These duplicates a string
- * @str: A string to duplicate
+ * _strcmp - Performs lexicogarphic comparison of two strangs.
+ * @s1: 1st string
+ * @s2: 2nd string
  *
- * Return: The pointer to the duplicated string
+ * Return: s1 < s2 if negative, s1 > s2 if positive, s1 ==s2 if zero
  */
-char *_strdup(const char *str)
+int _strcmp(char *st1, char *st2)
 {
-	int length = 0;
-	char *ret;
+	while (*st1 && *st2)
+	{
+		if (*st1 != *st2)
+			return (*st1 - *st2);
+		st1++;
+		st2++;
+	}
+	if (*st1 == *st2)
+		return (0);
+	else
+		return (*st1 < *st2 ? -1 : 1);
+}
 
-	if (str == NULL)
-		return (NULL);
-	while (*str++)
-		length++;
-	ret = malloc(sizeof(char) * (length + 1));
-	if (!ret)
-		return (NULL);
-	for (length++; length--;)
-		ret[length] = *--str;
+/**
+ * starts_with - Checks if needle starts with haystack
+ * @haystack: String to search
+ * @needle: Substring to find
+ *
+ * Return: The address of next char of haystack or Viod
+ */
+char *starts_with(const char *haystack, const char *needle)
+{
+	while (*needle)
+		if (*needle++ != *haystack++)
+			return (NULL);
+	return ((char *)haystack);
+}
+
+/**
+ * _strcat - Concatenates two strings
+ * @dest: Destination buffer
+ * @src: A source buffer
+ *
+ * Return: The pointer to destination buffer
+ */
+char *_strcat(char *dest, char *src)
+{
+	char *ret = dest;
+
+	while (*dest)
+		dest++;
+	while (*src)
+		*dest++ = *src++;
+	*dest = *src;
 	return (ret);
-}
-
-/**
- * _puts - This prints an input string
- * @str: A string to be printed
- *
- * Return: Viod
- */
-void _puts(char *str)
-{
-	int i = 0;
-
-	if (!str)
-		return;
-	while (str[i] != '\0')
-	{
-		_putchar(str[i]);
-		i++;
-	}
-}
-
-/**
- * _putchar - Writes the character c to stdout
- * @c: A character to print
- *
- * Return: 1 On success .
- * On error, return -1, and error is set accordingly,.
- */
-int _putchar(char c)
-{
-	static int i;
-	static char buf[WRITE_BUF_SIZE];
-
-	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
-	{
-		write(1, buf, i);
-		i = 0;
-	}
-	if (c != BUF_FLUSH)
-		buf[i++] = c;
-	return (1);
 }
