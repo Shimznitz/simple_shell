@@ -27,13 +27,13 @@ int unset_alias(info_t *info, char *str)
 	char *ptr, c;
 	int ret;
 
-	ptr = _strchr(str, '=');
+	ptr = _str_chr(str, '=');
 	if (!ptr)
 		return (1);
 	c = *ptr;
 	*ptr = 0;
-	ret = delete_node_at_index(&(info->alias),
-		get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
+	ret = _delete_node_at_index(&(info->alias),
+		_get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
 	*ptr = c;
 	return (ret);
 }
@@ -50,14 +50,14 @@ int set_alias(info_t *info, char *str)
 {
 	char *ptr;
 
-	ptr = _strchr(str, '=');
+	ptr = _str_chr(str, '=');
 	if (!ptr)
 		return (1);
 	if (!*++ptr)
 		return (unset_alias(info, str));
 
 	unset_alias(info, str);
-	return (add_node_end(&(info->alias), str, 0) == NULL);
+	return (addNodeEnd(&(info->alias), str, 0) == NULL);
 }
 
 /**
@@ -73,7 +73,7 @@ int print_alias(list_t *node)
 
 	if (node)
 	{
-		ptr = _strchr(node->str, '=');
+		ptr = _str_chr(node->str, '=');
 		for (a = node->str; a <= ptr; a++)
 		_putchar(*a);
 		_putchar('\'');
@@ -85,7 +85,7 @@ int print_alias(list_t *node)
 }
 
 /**
- * _myalias - It mimics the alias builtin (man alias)
+ * _myAlias - It mimics the alias builtin (man alias)
  * @info: It is a structure containing potential arguments. Used to maintain
  *  constant function prototype.
  *  Return: It is always 0
@@ -109,11 +109,11 @@ int _myAlias(info_t *info)
 	}
 	for (i = 1; info->argv[i]; i++)
 	{
-		ptr = _strchr(info->argv[i], '=');
+		ptr = _str_chr(info->argv[i], '=');
 		if (ptr)
 			set_alias(info, info->argv[i]);
 		else
-			print_alias(node_starts_with(info->alias, info->argv[i], '='));
+			print_alias(_node_starts_with(info->alias, info->argv[i], '='));
 	}
 
 	return (0);

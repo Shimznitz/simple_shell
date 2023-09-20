@@ -15,7 +15,7 @@ void _ePuts(char *str)
 		return;
 	while (str[i] != '\0')
 	{
-		_eputchar(str[i]);
+		_e_putchar(str[i]);
 		i++;
 	}
 }
@@ -44,7 +44,7 @@ int _e_putchar(char q)
 }
 
 /**
- * _put_fd - Writes the character c to given fd
+ * _putfd - Writes the character c to given fd
  * @q: Character to print
  * @fd: Filedescriptor
  *
@@ -52,7 +52,7 @@ int _e_putchar(char q)
  * On error, -1 is returned, and errno is set appropriately.
  */
 
-int _put_fd(char q, int fd)
+int _putfd(char q, int fd)
 {
 	static int i;
 	static char buf[WRITE_BUF_SIZE];
@@ -68,14 +68,14 @@ int _put_fd(char q, int fd)
 }
 
 /**
- * _puts_fd - Prints an input string
+ * _putsfd - Prints an input string
  * @str: String to be printed
  * @fd: Filedescriptor
  *
  * Return: It is the number of chars put
  */
 
-int _puts_fd(char *str, int fd)
+int _putsfd(char *str, int fd)
 {
 	int i = 0;
 
