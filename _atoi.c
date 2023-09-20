@@ -6,6 +6,7 @@
  *
  * Return: 1 if interactive mode, 0 if not
  */
+
 int interactive(info_t *info)
 {
 	return (isatty(STDIN_FILENO) && info->readfd <= 2);
@@ -17,6 +18,7 @@ int interactive(info_t *info)
  * @delimtr: Delimeter string
  * Return: 1 if true, 0 if false
  */
+
 int is_delimtr(char c, char *delimtr)
 {
 	while (*delimtr)
