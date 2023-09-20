@@ -3,7 +3,7 @@
 /**
  * hsh - This is the  main shell loop
  * @info: This is the  parameter and the  return info struct
- * @av: This is the  argument vector from main()
+ * @av: This is the  argument vector from main
  *
  * Return: On success 0, on error 1, or error code
  */
